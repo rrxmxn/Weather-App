@@ -1,0 +1,459 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;700&family=Kalam:wght@300&display=swap');
+@import url(modal.css);
+
+:root {
+    font-size: 16px;
+
+    --fonte-padrao: 'Josefin Sans', sans-serif;
+    --fonte-cursiva: font-family: 'Kalam', cursive;
+
+    --branco: #fff;
+    --preto: #000;
+    --azul-ceu: #42c5f5;    
+    --fundo: #adf5ff;
+    --borda: #00000059;   
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--fundo);
+    font-family: var(--fonte-padrao);
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nome-app {
+    max-width: 50em;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 1rem 0;
+    color: var(--preto);
+    text-shadow: 1px 1px 3px var(--preto),
+        1px -1px 3px var(--azul-ceu);
+    ;
+}
+
+.principal {
+    max-width: 50em;
+    min-height: fit-content;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.seleciona-cidade {
+    min-height: 2em;
+    max-width: 25em;
+    width: 80vw;
+    height: 4.5vh;
+    position: relative;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.seleciona-cidade__fundo {
+    height: 100%;
+    width: 80%;
+    position: absolute;
+    border: solid 1px var(--borda);
+    border-radius: .5em;
+    box-shadow: 1px 1px 3px var(--preto),
+        1px -1px 3px var(--azul-ceu);
+}
+
+#cidade {
+    background-color: transparent;
+    border: none;
+    width: 80%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 5px;
+    color: var(--preto);
+    font-size: 1rem;
+    margin-right: auto;
+}
+
+.cidade-nao-encontrada {
+    display: block;
+    margin: 0 auto;
+    background: var(--fundo);
+    font-size: 0.85em;
+    font-weight: 300;
+    border-radius: 15px;
+    width: 90%;
+    height: auto;
+    color: var(--preto);
+    padding: 1em;
+    padding-top: 1.5em;
+    position: relative;
+    margin-top: 1em;
+    box-shadow: 1px 1px 1px var(--preto),
+        1px -1px 1px var(--azul-ceu);
+}
+
+.cidade-nao-encontrada__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: .35em;
+    text-align: center;
+}
+
+.fecha-mensagem {
+    font-size: .5em;
+    position: absolute;
+    align-self: flex-end;
+    right: 1.5em;
+    top: 1em;
+    background-color: var(--fundo);
+    border: none;
+    box-shadow: 1px 1px 1px var(--preto),
+        1px -1px 1px var(--azul-ceu);
+}
+
+.fecha-mensagem:hover {
+    cursor: pointer;
+}
+
+.fecha-mensagem:active {
+    background-color: var(--borda);
+    color: var(--fundo);
+}
+
+.cidade-nao-encontrada:after {
+    /*Triangulo*/
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid var(--borda);
+    top: -20px;
+    left: 20%;
+}
+
+.seleciona-cidade__suggestions {
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    background-color: var(--fundo);
+    border: 1px solid var(--borda);
+    z-index: 1;
+    display: none;
+    margin-top: 4.5vh;
+    box-shadow: 1px 1px 1px var(--preto),
+        1px -1px 1px var(--azul-ceu);
+}
+
+.seleciona-cidade__suggestions div {
+    padding: 10px;
+    cursor: pointer;
+
+}
+
+.seleciona-cidade__suggestions div:hover {
+    background-color: var(--branco);
+    /* Cor de fundo quando passa o mouse */
+    border-radius: .5em;
+}
+
+#pesquisaBotao {
+    max-width: 15%;
+    min-width: 4em;
+    width: fit-content;
+    height: 100%;
+    align-self: flex-end;
+    border-radius: .5em;
+    border: solid 1px var(--borda);
+    background-color: var(--azul-claro);
+    box-shadow: 1px 1px 2px var(--preto),
+        1px -1px 3px var(--azul-ceu);
+}
+
+#pesquisaBotao:hover {
+    cursor: pointer;
+}
+
+.fa-magnifying-glass {
+    font-size: 1.25em;
+    color: var(--preto);
+    padding: .25em;
+}
+
+#pesquisaBotao:active i {
+    font-size: 95%;
+}
+
+#cidade::placeholder {
+    color: var(--preto);
+    font-family: var(--fonte-padrao);
+}
+
+#cidade:focus {
+    outline: none;
+}
+
+.container {
+    max-width: 35em;
+    width: 92.5%;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: .75em 0 auto 0;
+    gap: 1rem;
+}
+
+.container__principal {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 3px 3px 10px var(--preto),
+        3px -3px 10px var(--azul-ceu);
+}
+
+.nome-cidade {
+    font-size: 3em;
+    font-weight: 300;
+    padding: .5em 0 .25em 0;
+    text-transform: capitalize;
+}
+
+.temp-e-icon {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#tempo-icone {
+    width: 5rem;
+    height: 5rem;
+}
+
+.temperatura {
+    font-size: 6em;
+}
+
+.resumo-tempo {
+    font-size: 1.75em;
+    font-weight: 300;
+    margin-bottom: 1em;
+}
+
+.resumo-tempo::first-letter {
+    text-transform: capitalize;
+}
+
+.container__extras {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    gap: .5rem;
+}
+
+.bloco-extra {
+    min-width: 10rem;
+    width: max-content;
+    min-height: 7.5rem;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px var(--preto),
+        1px -1px 3px var(--azul-ceu);
+    padding: .5em 0;
+}
+
+.bloco-extra__nome {
+    font-size: 1.15em;
+    text-align: center;
+    font-weight: 300;
+    flex-wrap: wrap;
+}
+
+.bloco-extra__valor {
+    font-size: 3em;
+    text-align: center;
+    margin-top: .25em;
+}
+
+.saiba-mais {
+    text-align: center;
+    padding: .75em;
+}
+
+.saiba-mais__botao {
+    text-decoration: none;
+}
+
+.valor-e-unidade-de-medida {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.valor-e-unidade-de-medida__medida {
+    font-size: .75em;
+    margin-top: .25em;
+    align-self: center;
+}
+
+.pressao-valores {
+    display: flex;
+    flex-direction: column;
+}
+
+.pressao-valores__medida {
+    font-size: 1em;
+}
+
+.valor-e-unidade-de-medida__direcao {
+    font-size: 2em;
+    margin-top: .25em;
+    align-self: center;
+}
+
+#direcao-vento {
+    max-width: 2.5rem;
+    max-height: 2.5rem;
+    width: auto;
+    height: auto;
+    padding: 1em;
+    align-self: center;
+    opacity: .8;
+}
+
+.visibilidade-valores {
+    gap: .25em;
+}
+
+.visibilidade-valores h6 {
+    font-size: 2em;
+}
+
+.vento-valores {
+    gap: .15em;
+}
+
+.sol__container {
+    text-align: center;
+    height: 50%;
+}
+
+.sol__container__titulo {
+    font-size: 1.15em;
+    text-align: center;
+    padding: .5em 0 .25em 0;
+    font-weight: 300;
+}
+
+.sol__container__valor {
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+.hide {
+    display: none;
+}
+
+.footer {
+    width: 60%;
+    height: fit-content;
+    margin: 1rem auto 0 auto;
+}
+
+.footer__dados {
+    font-size: .65em;
+}
+
+.footer__dados a {
+    text-decoration: none;
+    color: var(--preto);
+}
+
+.footer__dados a:hover {
+    text-decoration: underline;
+}
+
+.footer__criador {
+    font-family: var(--fonte-cursiva);
+    font-weight: 200;
+    font-size: 2.5em;
+}
+
+.footer__criador a {
+    text-decoration: none;
+    color: var(--preto);
+}
+
+@media screen and (min-width: 1200px) {
+    body {
+        min-height: 100vh;
+        align-items: center;
+    }
+
+    .principal {
+        max-width: 75rem;
+        width: 80%;
+        min-height: 60vh;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 3px 3px 10px var(--preto),
+            3px -3px 10px var(--azul-ceu);
+        padding: 3rem 0;
+        border-radius: .25rem;
+    }
+
+    .container {
+        flex-direction: row;
+        max-width: none;
+        align-items: center;
+        margin-top: 2em;
+    }
+
+    .container__principal {
+        min-width: 18rem;
+        height: 20rem;
+        padding: 1.25em;
+    }
+
+    .container__extras {
+        justify-content: flex-end;
+    }
+
+    .bloco-extra {
+        min-width: 15rem;
+    }
+
+    .footer {
+        margin: 2rem auto;
+    }
+
+    .footer__criador {
+        font-size: 3em;
+    }
+}

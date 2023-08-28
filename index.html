@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Weather App</title>
+</head>
+
+<body>
+    <!-- <header></header> -->
+    <h1 class="nome-app">Weather App</h1>
+    <main class="principal">
+        <div class="seleciona-cidade hide" id="bloco-seleciona-cidade">
+            <div class="seleciona-cidade__fundo" id="cidade-fundo">
+                <input autocomplete="off" type="text" id="cidade" name="cidade"
+                    placeholder="Insira sua cidade..."></input>
+                <div class="cidade-nao-encontrada hide" id="jsMensagemCidade">
+                    <div class="cidade-nao-encontrada__container">
+                        <button onclick="fecharMensagem(jsMensagemCidade)" aria-label="fechar"
+                            class="fecha-mensagem">x</button>
+                        <p>Cidade não encontrada! Exibindo tempo para cidade predefinida.</p>
+                        <p>Considere pesquisar pelo nome original da cidade</p>
+                    </div>
+                </div>
+            </div>
+            <div class="seleciona-cidade__suggestions" id="suggestions"></div>
+            <button id="pesquisaBotao">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+        <div class="container">
+            <div class="container__principal">
+                <h2 class="nome-cidade" id="nome-cidade"></h2>
+                <div class="temp-e-icon">
+                    <h3 class="temperatura" id="temperatura"></h3>
+                    <img src="" alt="Icone da condição atual" id="tempo-icone">
+                </div>
+                <p class="resumo-tempo" id="resumo-tempo"></p>
+            </div>
+            <div class="container__extras">
+
+                <div class="bloco-extra sensacao" onclick="abrirModal('sensacao')">
+                    <h4 class="bloco-extra__nome">Sensação Térmica</h4>
+                    <h5 class="bloco-extra__valor" id="sensacao"></h5>
+                </div>
+                <dialog id="dialog-sensacao">
+                    <h2 class="dialog__titulo">Sensação Térmica</h2>
+                    <p class="dialog__paragrafo" id="sensacao-paragrafo"></p>
+                    <button onclick="fecharModal('sensacao')" aria-label="fechar" class="fecha-dialog">x</button>
+                </dialog>
+
+                <div class="bloco-extra umidade" onclick="abrirModal('umidade')">
+                    <h4 class="bloco-extra__nome">Umidade</h4>
+                    <h5 class="bloco-extra__valor" id="umidade"></h5>
+                </div>
+                <dialog id="dialog-umidade">
+                    <h2 class="dialog__titulo">Umidade</h2>
+                    <p class="dialog__paragrafo">A umidade relativa é a relação entre a quantidade de água no ar e a
+                        quantidade de água que o ar poderia ter. O ar pode conter mais umidade em temperaturas mais
+                        altas.</p>
+                    <button onclick="fecharModal('umidade')" aria-label="fechar" class="fecha-dialog">x</button>
+                </dialog>
+
+                <div class="bloco-extra pressao">
+                    <h4 class="bloco-extra__nome">Pressão</h4>
+                    <div class="valor-e-unidade-de-medida pressao-valores">
+                        <h5 class="bloco-extra__valor valor-e-unidade-de-medida__valor pressao-valores__valor"
+                            id="pressao"></h5>
+                        <h6 class="valor-e-unidade-de-medida__medida pressao-valores__medida hide" id="hPa">hPa</h6>
+                    </div>
+                </div>
+
+                <div class="bloco-extra visibilidade" onclick="abrirModal('visibilidade')">
+                    <h4 class="bloco-extra__nome">Visibilidade</h4>
+                    <div class="valor-e-unidade-de-medida visibilidade-valores">
+                        <h5 class="bloco-extra__valor valor-e-unidade-de-medida__valor" id="visibilidade"></h5>
+                        <h6 class="valor-e-unidade-de-medida__medida hide" id="medida-km">km</h6>
+                    </div>
+                </div>
+                <dialog id="dialog-visibilidade">
+                    <h2 class="dialog__titulo">Visibilidade</h2>
+                    <p class="dialog__paragrafo">A visibilidade informa até que distância você pode enxergar objetos
+                        como prédios e montanhas. É uma medida da transparência do ar e não leva em conta a quantidade
+                        de luz do sol ou a preseça de obstruções.</p>
+                    <p class="dialog__paragrafo">A visibilidade máxima que nossa aplicação consegue detectar é de 10
+                        quilômetros.</p>
+                    <button onclick="fecharModal('visibilidade')" aria-label="fechar" class="fecha-dialog">x</button>
+                </dialog>
+
+                <div class="bloco-extra vento" onclick="abrirModal('vento')">
+                    <h4 class="bloco-extra__nome">Vento</h4>
+                    <div class="valor-e-unidade-de-medida vento-valores">
+                        <h5 class="bloco-extra__valor valor-e-unidade-de-medida__valor" id="vento"></h5>
+                        <h6 class="valor-e-unidade-de-medida__medida hide" id="medida-kmh">km/h</h6>
+                        <h5 class="bloco-extra__valor valor-e-unidade-de-medida__direcao" id="ponto-cardeal"></h5>
+                    </div>
+                    <i class="fa-solid fa-arrow-up fa-lg hide" id="direcao-vento"></i>
+                </div>
+                <dialog id="dialog-vento">
+                    <h2 class="dialog__titulo">Vento</h2>
+                    <p class="dialog__paragrafo">A velocidade do vento é calculada com base na média em um período
+                        curto.</p>
+                    <p class="dialog__paragrafo" id="vento-paragrafo"></p>
+                    <button onclick="fecharModal('vento')" aria-label="fechar" class="fecha-dialog">x</button>
+                </dialog>
+
+                <div class="bloco-extra sol">
+                    <div class="sol__container">
+                        <h6 class="sol__container__titulo">Nascer do Sol</h6>
+                        <h6 class="sol__container__valor" id="nascer-sol"></h6>
+                    </div>
+                    <div class="sol__container">
+                        <h6 class="sol__container__titulo">Por do Sol</h6>
+                        <h6 class="sol__container__valor" id="por-sol"></h6>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <p class="footer__dados">Dados fornecidos por <a href="https://openweathermap.org/" target="_blank">
+                OpenWeather®</a></p>
+        <h3 class="footer__criador"><a href="#" alt="Portifólio">rxmxn</a></h3>
+    </footer>
+    <script src="scripts/funcoes.js"></script>
+    <script src="scripts/modal.js"></script>
+    <script src="scripts/configAPI.js"></script>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzTTVmIhfRtbQuy80xT_9IXIdhhb_cPu0&libraries=places&callback=initMap">
+    </script>
+    <script src="scripts/autocomplete.js"></script>
+    <script src="scripts/scripts.js"></script>
+</body>
+
+</html>
